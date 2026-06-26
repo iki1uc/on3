@@ -1,1 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ROOT index.html</title>
+</head>
+
+<body>
+
+<!-- Respo-1: on3 (Startpunkt) -->
+<div id="on3"
+     data-id="ID-01-ACT"
+     data-gate="GATE-α"
+     data-tmp="TMP-1">
+</div>
+
+<!-- NC LOAD -->
+<script>
+const NC = {
+    load: true,      // Pipeline 0 aktiv
+    run: false,      // wartet auf Klick
+    gate: "TB5",     // Tunnel aktiv
+    respo: "on3",    // erster Name
+    q: "Q1"          // Q1 → QI Bindung
+};
+</script>
+
+<!-- NC RUN (Klick) -->
+<button onclick="NC.run = true;">Klick</button>
+
+</body>
+</html>
 
