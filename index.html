@@ -3,31 +3,59 @@
 <head>
 <meta charset="utf-8">
 <title>ROOT index.html</title>
+<style>
+  .node { width: 40px; height: 40px; border: 1px solid #0f0; display:inline-block; text-align:center; line-height:40px; margin:4px; }
+  .row  { margin:8px 0; }
+</style>
 </head>
 
 <body>
 
-<!-- Respo-1: on3 (Startpunkt) -->
-<div id="on3"
-     data-id="ID-01-ACT"
-     data-gate="GATE-α"
-     data-tmp="TMP-1">
+<!-- TRI: u, me, in -->
+<div class="row" id="tri">
+  <div class="node" id="u">u</div>
+  <div class="node" id="me">me</div>
+  <div class="node" id="in">in</div>
 </div>
 
-<!-- NC LOAD -->
-<script>
-const NC = {
-    load: true,      // Pipeline 0 aktiv
-    run: false,      // wartet auf Klick
-    gate: "TB5",     // Tunnel aktiv
-    respo: "on3",    // erster Name
-    q: "Q1"          // Q1 → QI Bindung
-};
-</script>
+<!-- QUAD: u, me, in, run -->
+<div class="row" id="quad">
+  <div class="node" id="u_q">u</div>
+  <div class="node" id="run_q">run</div><br>
+  <div class="node" id="me_q">me</div>
+  <div class="node" id="in_q">in</div>
+</div>
 
-<!-- NC RUN (Klick) -->
-<button onclick="NC.run = true;">Klick</button>
+<script>
+// TRI – einfache Struktur
+const TRI = {
+  u:  { id: "u"   },
+  me: { id: "me"  },
+  in: { id: "in"  }
+};
+
+// QUAD – Operator-Struktur
+const QUAD = {
+  u:   { id: "u_q"   },
+  run: { id: "run_q" },
+  me:  { id: "me_q"  },
+  in:  { id: "in_q"  }
+};
+
+// einfache Pipeline 0/1
+function pipeline0() {
+  // LOAD: Dreieck
+  console.log("P0: TRI → u, me, in");
+}
+
+function pipeline1() {
+  // RUN: Viereck
+  console.log("P1: QUAD → u, run, me, in");
+}
+
+pipeline0();
+pipeline1();
+</script>
 
 </body>
 </html>
-
