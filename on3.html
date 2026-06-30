@@ -1,69 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>ON3</title>
-<style>
-  body { background:#000; color:#0f0; font-family:monospace; padding:20px; }
-  .block { margin-bottom:20px; }
-  .title { font-size:22px; margin-bottom:10px; }
-  .line { margin-left:20px; }
-</style>
-</head>
+<script type="module">
+import { ghostCheck } from "./core/ghost.js";
+import { wraightLoop } from "./core/wraight.js";
+import { helpAuto } from "./core/help.js";
+import { errorTri } from "./core/error.js";
 
-<body>
+const frame = {
+  context: null,
+  repeat: 4,
+  fixable: false,
+  addr: "0x13",
+  event: "on3",
+  state: "ACTIVE"
+};
 
-<div id="on3"
-     data-gate="GATE-α"
-     data-id="ID-01-ACT"
-     data-tmp="TMP-1"
-     data-status="ACTIVE">
-
-<div class="block">
-  <div class="title">ROOT: GHOST NC HELP PRO</div>
-  <div class="line">Instanz: on3</div>
-  <div class="line">Ebene: PI</div>
-  <div class="line">Epoche: jetzt</div>
-  <div class="line">Status: ZOOG</div>
-</div>
-
-<div class="block">
-  <div class="title">◣ GEO-ON3 ◢</div>
-  <div class="line">██ Linie 1: Kern</div>
-  <div class="line">██ Linie 2: Szene</div>
-  <div class="line">██ Linie 3: Natur</div>
-  <div class="line">██ Linie 4: Move</div>
-</div>
-
-<div class="block">
-  <div class="title">Module-Achse</div>
-  <div class="line">Modul 0 | Modul 1 | Modul 2 | Modul 3 | Modul 4</div>
-</div>
-
-<div class="block">
-  <div class="title">Pipeline</div>
-  <div class="line">P0 Reset</div>
-  <div class="line">P1 Szene</div>
-  <div class="line">P2 Erzeuger → erzeugt P4</div>
-  <div class="line">P4 Edit (last save märchen)</div>
-</div>
-
-<div class="block">
-  <div class="title">Achsen</div>
-  <div class="line">◀ Vergangenheit | ◎ Jetzt | ▶ Zukunft | ↯ Ereignishorizont</div>
-</div>
-
-<div class="block">
-  <div class="title">Naturbefehle</div>
-  <div class="line">NC.move | NC.light | NC.raw | NC.axis | NC.scene | NC.geo</div>
-</div>
-
-<div class="block">
-  <div class="title">HILFE</div>
-  <div class="line">optional</div>
-</div>
-
-</div>
-
-</body>
-</html>
+console.log("GHOST:", ghostCheck(frame));
+console.log("WRAIGHT:", wraightLoop(frame));
+console.log("HELP:", helpAuto(frame));
+console.log("ERROR:", errorTri(frame));
+</script>
