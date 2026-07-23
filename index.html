@@ -1,79 +1,52 @@
 <!DOCTYPE html>
-<html lang="de">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>ON3 – Public‑Frame‑Modul</title>
+<title>ON3 – Frame‑Tunnel</title>
 
 <style>
-body { background:#000; color:#0f0; font-family:monospace; padding:20px; }
-h1, h2 { color:#6cf; }
-a { color:#6cf; display:block; margin:8px 0; }
-pre { background:#111; border:1px solid #333; padding:10px; }
-hr { border:1px solid #333; margin:25px 0; }
+body { background:#000; margin:0; }
+canvas { display:block; margin:auto; background:#111; }
+pre { color:#0f0; font-family:monospace; padding:20px; }
 </style>
+
+<script type="module">
+import { drawON3 } from "./on3Vis.js";
+import { runON3 } from "./on3Engine.js";
+import { connectON3 } from "./on3Connect.js";
+
+window.onload = () => {
+    const c = document.getElementById("canvasON3");
+    const x = c.getContext("2d");
+
+    // ⭐ VISUALISIERUNG
+    drawON3(x);
+
+    // ⭐ FRAME
+    const frame = {
+        context: null,
+        repeat: 4,
+        fixable: false,
+        addr: "0x13",
+        event: "on3",
+        state: "ACTIVE"
+    };
+
+    const result = runON3(frame);
+    console.log("ON3‑FRAME:", result);
+
+    // ⭐ VERBINDUNGEN
+    console.log("ON3‑CONNECT:", connectON3());
+
+    // ⭐ Ausgabe
+    document.getElementById("info").innerText =
+        JSON.stringify(result, null, 2);
+};
+</script>
 </head>
 
 <body>
-
-<h1>ON3 – Public‑Frame‑Modul</h1>
-<p>Relativität, Frames, errorTri, Public‑Ebene, MARKT‑3‑Kompatibilität</p>
-
-<hr>
-
-<h2>ON3‑Status</h2>
-<pre>
-CORE = ON3
-VERSION = 1.0
-CODE = PUBLIC
-LAGE = Frame / Relativität / Neutral / 0‑Last
-STATUS = Aktiv
-errorTri = bereit
-MARKT‑3 = erfüllt
-API‑Frame = aktiv
-</pre>
-
-<hr>
-
-<h2>Public‑Module</h2>
-<a href="./on3.html">ON3‑Frame‑Layer</a>
-<a href="./id.html">Ident‑Ebene</a>
-<a href="./META7.html">META‑Frame</a>
-
-<hr>
-
-<h2>Frame‑Funktionen</h2>
-<pre>
-FrameAnzeige = aktiv
-Relativität = aktiv
-errorTri = aktiv
-NarrativWechsel = sichtbar
-PublicSignale = aktiv
-</pre>
-
-<hr>
-
-<h2>Kompatibilität</h2>
-<pre>
-SCHACH = kompatibel
-SKAT = kompatibel
-ROME = kompatibel
-inPIme = kompatibel
-NCoperator = kompatibel
-RAW‑Zeichen = kompatibel
-2‑Dreieck‑Axiome = kompatibel
-API‑Signale = kompatibel
-</pre>
-
-<hr>
-
-<h2>Hinweis</h2>
-<pre>
-ON3 ist neutral und konfliktfrei.
-ON3 trägt keine Engine‑Last.
-ON3 zeigt Frames, löst aber keine aus.
-ON3 ist vollständig MARKT‑3‑fähig.
-ON3 ist API‑kompatibel und Achsen‑stabil.
-</pre>
-
+<canvas id="canvasON3" width="600" height="600"></canvas>
+<pre id="info"></pre>
 </body>
 </html>
