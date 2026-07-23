@@ -2,24 +2,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ON3 – Frame‑Tunnel</title>
+<title>ON3 – Full Visual + Dashboard</title>
 
 <style>
-body { background:#000; margin:0; }
+body { background:#000; margin:0; color:#0f0; font-family:monospace; }
 canvas { display:block; margin:auto; background:#111; }
-pre { color:#0f0; font-family:monospace; padding:20px; }
+.respo { padding:20px; margin:10px; background:#111; border:1px solid #333; }
+#dashboard { background:#111; padding:20px; border:1px solid #333; }
 </style>
 
 <script type="module">
 import { drawON3 } from "./on3Vis.js";
-import { runON3 } from "./on3Engine.js";
-import { connectON3 } from "./on3Connect.js";
+import { drawRing6 } from "./ring6.js";
+import { drawRing7 } from "./on3Ring7.js";
+
+import { scanFrame } from "./on3Scanner.js";
+import { debugFrame } from "./on3Debugger.js";
+import { buildDashboard } from "./on3Dashboard.js";
 
 window.onload = () => {
     const c = document.getElementById("canvasON3");
     const x = c.getContext("2d");
 
     // ⭐ VISUALISIERUNG
+    drawRing6(x);
+    drawRing7(x);
     drawON3(x);
 
     // ⭐ FRAME
@@ -32,21 +39,33 @@ window.onload = () => {
         state: "ACTIVE"
     };
 
-    const result = runON3(frame);
-    console.log("ON3‑FRAME:", result);
+    const scan = scanFrame(frame);
+    const debug = debugFrame(frame);
 
-    // ⭐ VERBINDUNGEN
-    console.log("ON3‑CONNECT:", connectON3());
+    const result = { scan, debug };
 
-    // ⭐ Ausgabe
-    document.getElementById("info").innerText =
-        JSON.stringify(result, null, 2);
+    // ⭐ DASHBOARD
+    buildDashboard(result);
+
+    // ⭐ RESPO‑100
+    document.getElementById("respo100").innerText =
+        "RESPO‑100: Bildung – Top 100 aktiv";
+
+    // ⭐ RESPO‑360
+    document.getElementById("respo360").innerText =
+        "RESPO‑360: Bildung – 360° aktiv";
 };
 </script>
 </head>
 
 <body>
+
 <canvas id="canvasON3" width="600" height="600"></canvas>
-<pre id="info"></pre>
+
+<div id="dashboard"></div>
+
+<div id="respo100" class="respo"></div>
+<div id="respo360" class="respo"></div>
+
 </body>
 </html>
